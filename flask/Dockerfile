@@ -2,19 +2,18 @@
 FROM python:3.8-slim
 
 # Set the working directory
-WORKDIR ./flask
+WORKDIR /flask
 
 # Copy the requirements file into the container
-COPY ./flask/requirements.txt .
+COPY ./requirements.txt .
 
 # Install the required Python packages
 RUN pip install -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY flask/ .
+COPY . .
 
 # Grant execute permissions to the start.sh script
-COPY start.sh .
 RUN chmod +x start.sh
 
 # Expose the port that your Flask app listens on
