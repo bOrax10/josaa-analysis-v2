@@ -3,7 +3,7 @@ from flask import Flask, render_template, jsonify, make_response, request
 from flask_cors import CORS
 
 app = Flask(
-    __name__, template_folder="./src")
+    __name__, template_folder="../josaa-analysis/src")
 CORS(app)
 
 # Load the CSV as a DataFrame
