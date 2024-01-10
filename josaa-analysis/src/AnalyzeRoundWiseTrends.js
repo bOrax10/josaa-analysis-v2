@@ -63,7 +63,7 @@ const AnalyzeRoundWiseTrends = () => {
         // Fetch courses based on the selected institute
         if (instituteValue !== '') {
             // Replace this with your actual API endpoint
-            fetch(`http://localhost:5000/get_courses_from_institute?institute=${instituteValue}`)
+            fetch(`https://josaa-analysis-backend.onrender.com/get_courses_from_institute?institute=${instituteValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setCourses(data);
