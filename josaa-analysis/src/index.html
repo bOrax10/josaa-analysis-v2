@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CSV Data</title>
+</head>
+
+<body>
+    <table class="table-dark">
+        <tr>
+            <th>Institute</th>
+            <th>Academic Program Name</th>
+            <th>Quota</th>
+            <th>Seat Type</th>
+            <th>Gender</th>
+            <th>Opening Rank</th>
+            <th>Closing Rank</th>
+            <th>Year</th>
+            <th>Round</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row['Institute'] }}</td>
+            <td>{{ row['Academic Program Name'] }}</td>
+            <td>{{ row['Quota'] }}</td>
+            <td>{{ row['Seat Type'] }}</td>
+            <td>{{ row['Gender'] }}</td>
+            <td>{{ row['Opening Rank'] }}</td>
+            <td>{{ row['Closing Rank'] }}</td>
+            <td>{{ row['Year'] }}</td>
+            <td>{{ row['Round'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+buildCommand: |
+  docker build -t bOrax10/josaa-analysis:latest .
+publishDir: build
+
+startCommand: gunicorn -b 0.0.0.0:5000 app:app
+
+postBuild:
+  - npm install  # Add any additional commands you want to run after gunicorn
+  - npm run build

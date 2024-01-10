@@ -1,0 +1,44 @@
+body {
+  background-color: #1c1b22;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* In your CSS file or style tag */
+.custom-hr {
+  border-color: #777;
+  /* Replace with your desired color */
+}
+
+.custom-card-hover:hover {
+  background-color: #1c1b22;
+  /* Change to your desired hover background color */
+  /* Change to your desired hover text color */
+  box-shadow: 0 5px 10px #929690;
+  /* Optional shadow effect */
+}
+
+/* Add this to your stylesheet or inline style */
+/* Add this to your stylesheet or inline style */
+.page-link.active-link {
+  color:
+    /* Your desired color for the active link */
+  ;
+  background-color: #1c1b22;
+  /* Your desired background color for the active link */
+  border-color: white;
+  /* Set the border color to white */
+}
+
+.home {
+  color: white;
+}
