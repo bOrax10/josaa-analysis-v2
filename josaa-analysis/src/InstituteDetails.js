@@ -13,8 +13,8 @@ const BranchDetails = () => {
 
   const fetchData = async () => {
     try {
-      console.log(`http://localhost:5000/get_branch_data?iit=${iit}&branch=${branch}`);
-      const response = await fetch(`http://localhost:5000/get_branch_data?iit=${iit}&branch=${branch}`);
+      console.log(`https://josaa-analysis-backend.onrender.com/get_branch_data?iit=${iit}&branch=${branch}`);
+      const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_branch_data?iit=${iit}&branch=${branch}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

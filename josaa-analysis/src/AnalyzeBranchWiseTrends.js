@@ -70,7 +70,7 @@ const AnalyzeRoundWiseTrends = () => {
     useEffect(() => {
         // Fetch courses based on the selected branch
         if (branchValue !== '') {
-            fetch(`http://localhost:5000/get_courses_from_branch?branch=${branchValue}`)
+            fetch(`https://josaa-analysis-backend.onrender.com/get_courses_from_branch?branch=${branchValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setCourses(data);
@@ -87,7 +87,7 @@ const AnalyzeRoundWiseTrends = () => {
     useEffect(() => {
         // Fetch programs based on the selected course
         if (CourseValue !== '') {
-            fetch(`http://localhost:5000/get_institutes_from_course?branch=${branchValue}&course=${CourseValue}`)
+            fetch(`https://josaa-analysis-backend.onrender.com/get_institutes_from_course?branch=${branchValue}&course=${CourseValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setPrograms(data);
@@ -101,7 +101,7 @@ const AnalyzeRoundWiseTrends = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/get_branch_chart_data?branch=${branchValue}&course=${CourseValue}&institute=${instituteValue}&seat_type=${seatValue}&gender=${genderValue}`);
+            const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_branch_chart_data?branch=${branchValue}&course=${CourseValue}&institute=${instituteValue}&seat_type=${seatValue}&gender=${genderValue}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
