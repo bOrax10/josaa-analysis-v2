@@ -55,7 +55,7 @@ class CsvTable extends Component {
     const filterParam =
       branchParam + seatParam + genderParam + roundParam + minRankParam + maxRankParam + pageNumberParam;
 
-    fetch(`https://josaa-analysis-backend.onrender.com/get_csv_by_branch${filterParam}`)
+    fetch(`http://localhost:5000/get_csv_by_branch${filterParam}`)
       .then((response) => response.json())
       .then((data) => {
         const totalRows = data.total_rows ? data.total_rows : 0;

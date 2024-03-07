@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const BranchWiseInstitute = () => {
     const { branch: selectedBranch } = useParams();
@@ -10,7 +11,7 @@ const BranchWiseInstitute = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_iits_by_branch?branch=${selectedBranch}`);
+            const response = await fetch(`http://localhost:5000/get_iits_by_branch?branch=${selectedBranch}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -36,16 +37,18 @@ const BranchWiseInstitute = () => {
 
     const createCardsForArray = (key, array) => {
         return array.map((item, itemIndex) => (
-            <div key={itemIndex} className="col-md-6 col-lg-4 col-xl-3 mt-4">
-                <div className="card bg-dark text-light" style={{ width: '100%' }}>
-                    <div className="card-header">
-                        <h5 className="card-title">{key}</h5>
+                <div key={itemIndex} className="col-md-6 col-lg-4 mt-4">
+                    <Link to={`/institutes/${key}/${item}`} style={{ textDecoration: 'none', width:'100%'}}>
+                    <div className="card bg-dark text-light" style={{ width: '100%' }}>
+                        <div className="card-header">
+                            <h5 className="card-title">{key}</h5>
+                        </div>
+                        <div className="card-body">
+                            <p className="card-text text-secondary">{item}</p>
+                        </div>
                     </div>
-                    <div className="card-body">
-                        <p className="card-text text-secondary">{item}</p>
-                    </div>
+                    </Link>
                 </div>
-            </div>
         ));
     };
 

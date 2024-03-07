@@ -79,7 +79,7 @@ const BranchWiseCutoff = () => {
     };
 
     const fetchData = (branch, seat, gender, round, minRank, maxRank, pageNumber) => {
-        fetch(`https://josaa-analysis-backend.onrender.com/get_csv_by_branch?branch=${branch}&seat=${seat}&gender=${gender}&round=${round}&minrank=${minRank}&maxrank=${maxRank}&pageno=${pageNumber}`)
+        fetch(`http://localhost:5000/get_csv_by_branch?branch=${branch}&seat=${seat}&gender=${gender}&round=${round}&minrank=${minRank}&maxrank=${maxRank}&pageno=${pageNumber}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

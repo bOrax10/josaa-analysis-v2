@@ -10,7 +10,7 @@ const IITDetails = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_iit?iit=${iit}`);
+            const response = await fetch(`http://localhost:5000/get_iit?iit=${iit}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

@@ -39,16 +39,16 @@ const chartOptions = {
 
 
 const AnalyzeRoundWiseTrends = () => {
-    const [instituteValue, setInstituteValue] = useState('');
+    const [branchValue, setBranchValue] = useState('');
     const [courses, setCourses] = useState([]);
     const [programs, setPrograms] = useState([]);
     const [CourseValue, setCourseValue] = useState('');
-    const [programValue, setProgramValue] = useState('');
+    const [instituteValue, setInstituteValue] = useState('');
     const [seatValue, setSeatValue] = useState('OPEN');
     const [genderValue, setGenderValue] = useState('Gender-Neutral');
     const [seatDropdownButtonText, setSeatDropdownButtonText] = useState(seatValue);
     const [genderDropdownButtonText, setGenderDropdownButtonText] = useState(genderValue);
-    const [programDropdownButtonText, setProgramDropdownButtonText] = useState(programValue);
+    const [programDropdownButtonText, setProgramDropdownButtonText] = useState(instituteValue);
     const [instituteDropdownButtonText, setInstituteDropdownButtonText] = useState('Select');
     const [CourseDropdownButtonText, setCourseDropdownButtonText] = useState('Select');
     const [allDropdownsSelected, setAllDropdownsSelected] = useState(false);
@@ -68,9 +68,9 @@ const AnalyzeRoundWiseTrends = () => {
     'SC (PwD)', 'ST (PwD)', 'EWS', 'EWS (PwD)'];
 
     useEffect(() => {
-        // Fetch courses based on the selected institute
-        if (instituteValue !== '') {
-            fetch(`https://josaa-analysis-backend.onrender.com/get_courses_from_institute?institute=${instituteValue}`)
+        // Fetch courses based on the selected branch
+        if (branchValue !== '') {
+            fetch(`http://localhost:5000/get_courses_from_branch?branch=${branchValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setCourses(data);
@@ -82,16 +82,16 @@ const AnalyzeRoundWiseTrends = () => {
                     console.error('Error fetching courses:', error);
                 });
         }
-    }, [instituteValue]);
+    }, [branchValue]);
 
     useEffect(() => {
         // Fetch programs based on the selected course
         if (CourseValue !== '') {
-            fetch(`https://josaa-analysis-backend.onrender.com/get_programs_from_course?institute=${instituteValue}&course=${CourseValue}`)
+            fetch(`http://localhost:5000/get_institutes_from_course?branch=${branchValue}&course=${CourseValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setPrograms(data);
-                    setProgramValue('');
+                    setInstituteValue('');
                 })
                 .catch((error) => {
                     console.error('Error fetching programs:', error);
@@ -101,7 +101,7 @@ const AnalyzeRoundWiseTrends = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_round_chart_data?institute=${instituteValue}&course=${CourseValue}&program=${programValue}&seat_type=${seatValue}&gender=${genderValue}`);
+            const response = await fetch(`http://localhost:5000/get_branch_chart_data?branch=${branchValue}&course=${CourseValue}&institute=${instituteValue}&seat_type=${seatValue}&gender=${genderValue}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -116,11 +116,11 @@ const AnalyzeRoundWiseTrends = () => {
     
     useEffect(() => {
         fetchData();
-    }, [instituteValue, CourseValue, programValue, seatValue, genderValue]);
+    }, [branchValue, CourseValue, instituteValue, seatValue, genderValue]);
         
     useEffect(() => {
-        setAllDropdownsSelected(instituteValue !== '' && CourseValue !== '' && programValue !== '' && seatValue !== '' && genderValue !== '');
-    }, [instituteValue, CourseValue, programValue, seatValue, genderValue]);
+        setAllDropdownsSelected(branchValue !== '' && CourseValue !== '' && instituteValue !== '' && seatValue !== '' && genderValue !== '');
+    }, [branchValue, CourseValue, instituteValue, seatValue, genderValue]);
 
     const closingRanksMap = new Map();
     if (Array.isArray(chartData)) {
@@ -163,19 +163,19 @@ const AnalyzeRoundWiseTrends = () => {
     const handleInstituteDropdownChange = (event) => {
         const value = event.target.getAttribute('data-value');
         console.log(value);
-        setCourseValue(''); // Reset the selected course when the institute changes
-        setProgramValue(''); // Reset the selected program when the institute changes
+        setCourseValue(''); // Reset the selected course when the branch changes
+        setInstituteValue(''); // Reset the selected institute when the branch changes
         setCourseDropdownButtonText('Select'); // Reset the course dropdown text
-        setProgramDropdownButtonText('Select'); // Reset the program dropdown text
+        setProgramDropdownButtonText('Select'); // Reset the institute dropdown text
         setCourses([]); // Clear the courses data
         setPrograms([]); // Clear the programs data
         setChartData([]);
         if (value !== 'Clear') {
-            setInstituteValue(value);
+            setBranchValue(value);
             setInstituteDropdownButtonText(value);
 
         } else {
-            setInstituteValue('');
+            setBranchValue('');
             setInstituteDropdownButtonText('Select');
         }
     };
@@ -185,13 +185,13 @@ const AnalyzeRoundWiseTrends = () => {
         const value = event.target.getAttribute('data-value');
         setCourseValue(value);
         setCourseDropdownButtonText(value);
-        setProgramValue('');
+        setInstituteValue('');
         setProgramDropdownButtonText('Select');
     };
 
     const handleProgramDropdownChange = (event) => {
         const value = event.target.getAttribute('data-value');
-        setProgramValue(value);
+        setInstituteValue(value);
         setProgramDropdownButtonText(value);
     };
 
@@ -216,7 +216,7 @@ This helps understand the popularity and perception of a branch among engineerin
             <div className="row m-4">
                 <div className="col-md-4">
                     <div className="dropdown">
-                        <div className="institute">
+                        <div className="branch">
                             <p className="text-light">Branch</p>
                             <button
                                 className="btn btn-secondary dropdown-toggle custom-dropdown-button col-12"
@@ -241,7 +241,7 @@ This helps understand the popularity and perception of a branch among engineerin
                     </div>
                 </div>
 
-                <div className="col-md-4 mt-3 mt-md-0" style={{ visibility: instituteValue!='' ? 'visible' : 'hidden' }}>
+                <div className="col-md-4 mt-3 mt-md-0" style={{ visibility: branchValue!='' ? 'visible' : 'hidden' }}>
                     <div className="dropdown">
                         <div className="seat-type">
                             <p className="text-light">Course</p>
@@ -270,8 +270,8 @@ This helps understand the popularity and perception of a branch among engineerin
 
                 <div className="col-md-4 mt-3 mt-md-0" style={{ visibility: CourseValue!='' ? 'visible' : 'hidden' }}>
                     <div className="dropdown">
-                        <div className="program-type">
-                            <p className="text-light">Program</p>
+                        <div className="institute-type">
+                            <p className="text-light">Institute</p>
                             <button
                                 className="btn btn-secondary dropdown-toggle custom-dropdown-button col-12"
                                 type="button"
@@ -283,10 +283,10 @@ This helps understand the popularity and perception of a branch among engineerin
                                 {programDropdownButtonText}
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                {programs.map((program, index) => (
+                                {programs.map((institute, index) => (
                                     <li key={index}>
-                                        <a className="dropdown-item" href="#" data-value={program} onClick={handleProgramDropdownChange}>
-                                            {program}
+                                        <a className="dropdown-item" href="#" data-value={institute} onClick={handleProgramDropdownChange}>
+                                            {institute}
                                         </a>
                                     </li>
                                 ))}

@@ -107,6 +107,38 @@ def get_round_chart_data():
     return result_list
 
 
+@app.route('/get_branch_chart_data', methods=["GET"])
+def get_branch_chart_data():
+    branch = request.args.get('branch', default='', type=str)
+    course = request.args.get('course', default='', type=str)
+    institute = request.args.get('institute', default='', type=str)
+    seatType = request.args.get('seat_type', default='', type=str)
+    gender = request.args.get('gender', default='', type=str)
+    filtered_data = csv_data
+    if (branch != ''):
+        filtered_data = filtered_data[filtered_data["Category"].str.contains(
+            branch, case=False, na=False)]
+    if (course != ''):
+        if ('Dual Degree' in course):
+            filtered_data = filtered_data[filtered_data['Course'].str.contains(
+                'Dual Degree', case=False, na=False)]
+        elif ('Integrated' in course):
+            filtered_data = filtered_data[filtered_data['Course'].str.contains(
+                'Integrated', case=False, na=False)]
+        else:
+            filtered_data = filtered_data[filtered_data['Course'].str.contains(
+                course, case=False, na=False)]
+    if (institute != ''):
+        filtered_data = filtered_data[filtered_data['Institute'] == institute]
+    if (seatType != ''):
+        filtered_data = filtered_data[csv_data['Seat Type'] == seatType]
+    if (gender != ''):
+        filtered_data = filtered_data[csv_data['Gender'] == gender]
+
+    result_list = filtered_data.to_json(orient='records')
+    return result_list
+
+
 @app.route('/get_iits_by_branch', methods=["GET"])
 def get_iits_by_branch():
     branch = request.args.get('branch', default='', type=str)
@@ -146,6 +178,48 @@ def get_programs_from_course():
             sr = df[df['Course'] == course]['Category'].unique()
             return sr.tolist()
     return []
+
+
+@app.route('/get_courses_from_branch', methods=["GET"])
+def get_courses_from_branch():
+    branch = request.args.get('branch', default='', type=str)
+    if (branch != ''):
+        x = csv_data[csv_data["Category"].str.contains(
+            branch, case=False, na=False)]
+        y = x["Course"].unique()
+        return y.tolist()
+    return []
+
+
+@app.route('/get_institutes_from_course', methods=["GET"])
+def get_institutes_from_course():
+    branch = request.args.get('branch', default='', type=str)
+    course = request.args.get('course', default='', type=str)
+    if (branch != ''):
+        if (course != ''):
+            x = csv_data[csv_data["Category"].str.contains(
+                branch, case=False, na=False)]
+            sr = x[x['Course'] == course]['Institute'].unique()
+            return sr.tolist()
+    return []
+
+
+@app.route('/get_branch_data', methods=["GET"])
+def branch_details():
+    iit = request.args.get('iit', default='', type=str)
+    branch = request.args.get('branch', default='', type=str)
+    filtered_data = csv_data[csv_data['Institute'] == iit]
+    filtered_data = filtered_data[filtered_data['Academic Program Name'] == branch]
+    filtered_data = filtered_data[filtered_data['Seat Type'] == "OPEN"]
+    response_json = filtered_data.to_json(orient='records')
+
+    response = make_response(response_json)
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+
+    return response
 
 
 @app.route('/get_csv_by_branch', methods=["GET"])

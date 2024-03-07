@@ -63,7 +63,7 @@ const AnalyzeRoundWiseTrends = () => {
         // Fetch courses based on the selected institute
         if (instituteValue !== '') {
             // Replace this with your actual API endpoint
-            fetch(`https://josaa-analysis-backend.onrender.com/get_courses_from_institute?institute=${instituteValue}`)
+            fetch(`http://localhost:5000/get_courses_from_institute?institute=${instituteValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setCourses(data);
@@ -81,7 +81,7 @@ const AnalyzeRoundWiseTrends = () => {
         // Fetch programs based on the selected course
         if (CourseValue !== '') {
             // Replace this with your actual data fetching logic (API call, etc.)
-            fetch(`https://josaa-analysis-backend.onrender.com/get_programs_from_course?institute=${instituteValue}&course=${CourseValue}`)
+            fetch(`http://localhost:5000/get_programs_from_course?institute=${instituteValue}&course=${CourseValue}`)
                 .then((response) => response.json())
                 .then((data) => {
                     setPrograms(data);
@@ -95,7 +95,7 @@ const AnalyzeRoundWiseTrends = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://josaa-analysis-backend.onrender.com/get_round_chart_data?institute=${instituteValue}&course=${CourseValue}&program=${programValue}&seat_type=${seatValue}&gender=${genderValue}`);
+            const response = await fetch(`http://localhost:5000/get_round_chart_data?institute=${instituteValue}&course=${CourseValue}&program=${programValue}&seat_type=${seatValue}&gender=${genderValue}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
