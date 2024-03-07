@@ -1,23 +1,7 @@
-# Use the official Python image as the base image
-FROM python:3.8-slim
-
-# Set the working directory
+FROM python:3.10
+EXPOSE 8080
 WORKDIR /flask
-
-# Copy the requirements file into the container
 COPY ./requirements.txt .
-
-# Install the required Python packages
-RUN pip install -r requirements.txt
-
-# Copy the rest of the application code into the container
+RUN pip3 install -r requirements.txt
 COPY . .
-
-# Grant execute permissions to the start.sh script
-RUN chmod +x start.sh
-
-# Expose the port that your Flask app listens on
-EXPOSE 5000
-
-# Start the Flask app using the start.sh script
-CMD ["./start.sh"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "app:app"]
