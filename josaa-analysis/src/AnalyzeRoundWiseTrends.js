@@ -97,7 +97,7 @@ const AnalyzeRoundWiseTrends = () => {
         if (instituteValue !== "") {
             // Replace this with your actual API endpoint
             fetch(
-                `http://borax10.pythonanywhere.com/get_courses_from_institute?institute=${instituteValue}`
+                `https://borax10.pythonanywhere.com/get_courses_from_institute?institute=${instituteValue}`
             )
                 .then((response) => response.json())
                 .then((data) => {
@@ -117,7 +117,7 @@ const AnalyzeRoundWiseTrends = () => {
         if (CourseValue !== "") {
             // Replace this with your actual data fetching logic (API call, etc.)
             fetch(
-                `http://borax10.pythonanywhere.com/get_programs_from_course?institute=${instituteValue}&course=${CourseValue}`
+                `https://borax10.pythonanywhere.com/get_programs_from_course?institute=${instituteValue}&course=${CourseValue}`
             )
                 .then((response) => response.json())
                 .then((data) => {
@@ -133,7 +133,7 @@ const AnalyzeRoundWiseTrends = () => {
     const fetchData = async () => {
         try {
             const response = await fetch(
-                `http://borax10.pythonanywhere.com/get_round_chart_data?institute=${instituteValue}&course=${CourseValue}&program=${programValue}&seat_type=${seatValue}&gender=${genderValue}`
+                `https://borax10.pythonanywhere.com/get_round_chart_data?institute=${instituteValue}&course=${CourseValue}&program=${programValue}&seat_type=${seatValue}&gender=${genderValue}`
             );
             if (!response.ok) {
                 throw new Error("Network response was not ok");

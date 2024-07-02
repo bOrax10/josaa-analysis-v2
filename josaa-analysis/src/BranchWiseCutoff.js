@@ -130,7 +130,7 @@ const BranchWiseCutoff = () => {
 
     const fetchData = (branch, seat, gender, round, minRank, maxRank, pageNumber) => {
         fetch(
-            `http://borax10.pythonanywhere.com/get_csv_by_branch?branch=${branch}&seat=${seat}&gender=${gender}&round=${round}&minrank=${minRank}&maxrank=${maxRank}&pageno=${pageNumber}`
+            `https://borax10.pythonanywhere.com/get_csv_by_branch?branch=${branch}&seat=${seat}&gender=${gender}&round=${round}&minrank=${minRank}&maxrank=${maxRank}&pageno=${pageNumber}`
         )
             .then((response) => response.json())
             .then((data) => {

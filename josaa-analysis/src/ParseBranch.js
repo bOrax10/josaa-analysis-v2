@@ -63,7 +63,7 @@ class CsvTable extends Component {
             maxRankParam +
             pageNumberParam;
 
-        fetch(`http://borax10.pythonanywhere.com/get_csv_by_branch${filterParam}`)
+        fetch(`https://borax10.pythonanywhere.com/get_csv_by_branch${filterParam}`)
             .then((response) => response.json())
             .then((data) => {
                 const totalRows = data.total_rows ? data.total_rows : 0;

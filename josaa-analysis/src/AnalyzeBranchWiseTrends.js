@@ -110,7 +110,9 @@ const AnalyzeRoundWiseTrends = () => {
     useEffect(() => {
         // Fetch courses based on the selected branch
         if (branchValue !== "") {
-            fetch(`http://borax10.pythonanywhere.com/get_courses_from_branch?branch=${branchValue}`)
+            fetch(
+                `https://borax10.pythonanywhere.com/get_courses_from_branch?branch=${branchValue}`
+            )
                 .then((response) => response.json())
                 .then((data) => {
                     setCourses(data);
@@ -128,7 +130,7 @@ const AnalyzeRoundWiseTrends = () => {
         // Fetch programs based on the selected course
         if (CourseValue !== "") {
             fetch(
-                `http://borax10.pythonanywhere.com/get_institutes_from_course?branch=${branchValue}&course=${CourseValue}`
+                `https://borax10.pythonanywhere.com/get_institutes_from_course?branch=${branchValue}&course=${CourseValue}`
             )
                 .then((response) => response.json())
                 .then((data) => {
@@ -144,7 +146,7 @@ const AnalyzeRoundWiseTrends = () => {
     const fetchData = async () => {
         try {
             const response = await fetch(
-                `http://borax10.pythonanywhere.com/get_branch_chart_data?branch=${branchValue}&course=${CourseValue}&institute=${instituteValue}&seat_type=${seatValue}&gender=${genderValue}`
+                `https://borax10.pythonanywhere.com/get_branch_chart_data?branch=${branchValue}&course=${CourseValue}&institute=${instituteValue}&seat_type=${seatValue}&gender=${genderValue}`
             );
             if (!response.ok) {
                 throw new Error("Network response was not ok");

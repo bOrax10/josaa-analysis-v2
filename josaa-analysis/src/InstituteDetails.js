@@ -14,10 +14,10 @@ const BranchDetails = () => {
     const fetchData = async () => {
         try {
             console.log(
-                `http://borax10.pythonanywhere.com/get_branch_data?iit=${iit}&branch=${branch}`
+                `https://borax10.pythonanywhere.com/get_branch_data?iit=${iit}&branch=${branch}`
             );
             const response = await fetch(
-                `http://borax10.pythonanywhere.com/get_branch_data?iit=${iit}&branch=${branch}`
+                `https://borax10.pythonanywhere.com/get_branch_data?iit=${iit}&branch=${branch}`
             );
             if (!response.ok) {
                 throw new Error("Network response was not ok");

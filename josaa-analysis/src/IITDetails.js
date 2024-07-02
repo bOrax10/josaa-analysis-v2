@@ -10,7 +10,7 @@ const IITDetails = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://borax10.pythonanywhere.com/get_iit?iit=${iit}`);
+            const response = await fetch(`https://borax10.pythonanywhere.com/get_iit?iit=${iit}`);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }

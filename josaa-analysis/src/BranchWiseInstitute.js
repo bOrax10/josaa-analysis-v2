@@ -12,7 +12,7 @@ const BranchWiseInstitute = () => {
     const fetchData = async () => {
         try {
             const response = await fetch(
-                `http://borax10.pythonanywhere.com/get_iits_by_branch?branch=${selectedBranch}`
+                `https://borax10.pythonanywhere.com/get_iits_by_branch?branch=${selectedBranch}`
             );
             if (!response.ok) {
                 throw new Error("Network response was not ok");
